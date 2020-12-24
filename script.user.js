@@ -5,7 +5,7 @@
 // @description AtCoderのコンテストにおいて前の問題より後ろの問題の正解者が多い時に通知します
 // @author      polyester-CTRL
 // @match        https://atcoder.jp/contests/*/standings
-// @match        https://atcoder.jp/contests/*/standings/
+// @match        https://atcoder.jp/contests/*/standings/json
 // @require      https://unpkg.com/axios/dist/axios.min.js
 // @grant        none
 // ==/UserScript==
@@ -14,7 +14,7 @@
   'use strict';
 
   // My code 
-  if ((!('Notification' in window)) || (startTime == undefined)) {
+  if ((!('Notification' in window)) || (startTime === undefined)) {
     return;
   }
   let permission = Notification.permission;
@@ -32,7 +32,7 @@
       if (startTime.isAfter()) {
         return;
       }
-      if (endTime.isAfter()) {
+      if (endTime.isBefore()) {
         clearInterval(id);
         return;
       }
