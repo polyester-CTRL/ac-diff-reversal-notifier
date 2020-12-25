@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name        ac-diff-reversal-notifier
-// @namespace   https://github.com/polyester-CTRL
-// @version     0.1
-// @description AtCoderのコンテストにおいて前の問題より後ろの問題の正解者が多い時に通知します
-// @author      polyester-CTRL
+// @name         ac-diff-reversal-notifier
+// @namespace    https://github.com/polyester-CTRL
+// @version      0.1
+// @description  AtCoderのコンテストにおいて前の問題より後ろの問題の正解者が多い時に通知します
+// @author       polyester-CTRL
 // @match        https://atcoder.jp/contests/*/standings
 // @match        https://atcoder.jp/contests/*/standings/json
-// @require      https://unpkg.com/axios/dist/axios.min.js
+// @require      https://cdn.jsdelivr.net/npm/axios@0.19.0/dist/axios.min.js
 // @grant        none
 // ==/UserScript==
 
@@ -18,15 +18,15 @@
     return;
   }
   let permission = Notification.permission;
-  if (permission == 'denied') {
+  if (permission === 'denied') {
     return;
   }
+  let jsonURL = window.location.href.replace(/\/+$/, '') + '/json';
+  console.log(jsonURL);
   Notification.requestPermission().then(function () {
     if (endTime.isBefore()) {
       return;
     }
-    let jsonURL = window.location.href.replace(/\/+$/, '') + '/json';
-    console.log(jsonURL);
 
     let id = setInterval(function () {
       if (startTime.isAfter()) {
